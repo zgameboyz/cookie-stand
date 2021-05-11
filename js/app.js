@@ -1,5 +1,5 @@
 'use strict'
- let hours = ['6am: ','7am: ','8am: ','9am: ','10am: ','11am: ','12pm: ','1pm: ','2pm: ','3pm: ','4pm: ','5pm: ','6pm: ','7pm: ',"Total: "];
+ let hours = ['6am: ','7am: ','8am: ','9am: ','10am: ','11am: ','12pm: ','1pm: ','2pm: ','3pm: ','4pm: ','5pm: ','6pm: ','7pm: ',"Daily Location Totals: "];
 
 
 let objectNumber = 0; 
@@ -17,17 +17,24 @@ function Locations(name, min, max,avg){
     }
  Locations.prototype.getCookiesEachHour = function(){
    this.arrayCookie = [];
+   this.numCookie = [];
+ 
+
    let total = 0;
    let currentCount = 0;
   for(let i=0; i<hours.length-1 ;i++){
     currentCount = Math.floor(randomCookie(this.min,this.max)*this.avg); 
     this.arrayCookie.push(`${hours[i]} ${currentCount} cookies`);
+    this.numCookie.push(currentCount);
+
     total += currentCount;
     console.log(total);
-
+    
     
  }
     this.arrayCookie.push(`Total: ${total} cookies`);
+    this.numCookie.push(total);
+    
  return this.arrayCookie;
 }
 let seattle = new Locations("Seattle", 23, 65, 6.3);
@@ -113,11 +120,39 @@ function addTableHeader() {
     
   }
   
+function addTableFooter(){
+  const footer = document.getElementById("table");
+  const tr = document.createElement("tr");
+    footer.appendChild(tr);
+    const nameTd = document.createElement('td');
+    nameTd.textContent = "Totals";
+    footer.appendChild(nameTd);
+    let totalFooter = 0;
+    for (let j=0; j < hours.length-1; j++ ){
+      
+      const createTd = document.createElement('td');
+      
+      for(let k=0; k < objectNumber; k++){
+        totalFooter += objectsArray[k].numCookie[j];
+      }
+        createTd.textContent = (totalFooter);
+    
+    footer.appendChild(createTd);
+    totalFooter = 0;
+    }
+   
+    const totalTd = document.createElement('td')
+    for(let k=0; k < objectNumber; k++){
+      totalFooter += objectsArray[k].numCookie[objectsArray[k].numCookie.length-1];
+    }
+      totalTd.textContent = (totalFooter);
+      footer.appendChild(totalTd);
 
+}
 
 //  }
 
-
+// I have to add the 0 place of each different object then repeat for each instance
 
 
 addTableHeader();
@@ -126,7 +161,7 @@ addTableBody(objectsArray[1]);
 addTableBody(objectsArray[2]);
 addTableBody(objectsArray[3]);
 addTableBody(objectsArray[4]);
-//addTableFooter();
+addTableFooter();
 
 
 /*
@@ -169,14 +204,3 @@ Function to make the store location row loop
 */
 
 
-
-// makeCookieDiv(seattle);
-// makeCookieLi(seattle);
-// makeCookieDiv(Tokyo);
-// makeCookieLi(Tokyo);
-// makeCookieDiv(Dubai);
-// makeCookieLi(Dubai);
-// makeCookieDiv(Paris);
-// makeCookieLi(Paris);
-// makeCookieDiv(Lima);
-// makeCookieLi(Lima);

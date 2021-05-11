@@ -2,7 +2,7 @@ th {
   margin: 20px;
   padding: 20px;
   border: solid 5px black ;
-  background-color: red;
+  background-color: salmon;
 
 }
 body { 
@@ -10,4 +10,7 @@ body {
 
 
 
+}
+td{
+  border: solid 5px black ;
 }
