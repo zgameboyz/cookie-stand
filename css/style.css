@@ -1,3 +1,43 @@
+nav{
+
+  /* border: 5px solid lightcoral; */
+  width: 1000px;
+  display:flex;
+  flex-direction: row;
+  justify-items: center space-between 20px;
+  background-color: lightcyan;
+  border: #ff4292 solid 5px;
+  margin: auto;
+  }
+  nav a {
+    color: black;
+    font-size: 35pt;
+  }
+  nav button{
+    width: 500px;
+    height: 250px;
+    margin: auto;
+    font-size: larger;
+    background: url("../img/frosted-cookie.jpg") no-repeat;
+    background-size: 500px 250px;
+    
+    
+  }
+  
+  #family{
+    width: 1000px;
+  }
+  #family img{
+    width: 1000px;
+   
+
+  }
+  #family article{
+    text-align: center;
+    font-size: 2em;
+  }
+
+
 th {
   margin: 20px;
   padding: 20px;
@@ -7,10 +47,86 @@ th {
 }
 body { 
   background-color: lightcyan;
-
-
+  width: 100px;
+  margin-left:33%;
 
 }
 td{
   border: solid 5px black ;
+}
+p{
+  
+  
+  margin-top: 25px;
+  
+}
+h1{
+  font-size: 3em;
+}
+header h1 p {
+  width: 1000px;
+  border: solid #ff4292 5px;
+  text-align: center;
+  border-radius: 15px;
+}
+h3 {
+  font-size: larger;
+  color: #ff4292;
+  /* display:flex;
+  align-items: flex-start; */
+  
+  
+}
+#footerHeading{
+  display: flex;
+  flex-direction: row;
+  
+}
+#locationHead{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+#hohHead{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+
+
+}
+#contactUsHead{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
+#locationList{
+
+ display: flex;
+ flex-direction: column;
+ width: 33%;
+}
+#hoursList{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+#ContactUs{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  margin-left: 90px;
+}
+
+#footerInfo{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+
+footer{
+  
+  width: 1000px;
+  
 }
