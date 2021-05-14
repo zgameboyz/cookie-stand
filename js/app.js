@@ -1,53 +1,96 @@
 'use strict'
- let hours = ['6am: ','7am: ','8am: ','9am: ','10am: ','11am: ','12pm: ','1pm: ','2pm: ','3pm: ','4pm: ','5pm: ','6pm: ','7pm: ',"Daily Location Totals: "];
+let hours = ['6am: ', '7am: ', '8am: ', '9am: ', '10am: ', '11am: ', '12pm: ', '1pm: ', '2pm: ', '3pm: ', '4pm: ', '5pm: ', '6pm: ', '7pm: ', "Daily Location Totals: "];
+
+const allStores = [];
+
+let objectNumber = 0;
+
+const formElem = document.getElementById('addStoreForm');
+//submit funciton
+
+function handleSubmit(event) {
+  //Do this for every form
+  event.preventDefault();
+  let name = event.target.name.value;
+  let min = event.target.min.value;
+  let max = event.target.max.value;
+  let avg = event.target.avg.value;
 
 
-let objectNumber = 0; 
-function randomCookie(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);  
+  let newLocations = new Locations(name, min, max, avg);
+  console.log(newLocations);
+  allStores.push(newLocations);
+
+  newLocations.getCookiesEachHour();
+  renderAllLocations();
+  event.target.reset();
+
 }
-function Locations(name, min, max,avg){
+function renderAllLocations() {
+  const table = document.getElementById('table');
+  table.innerHTML = '';
+  addTableHeader();
+  for (let i = 0; i < allStores.length; i++) {
+    addTableBody(allStores[i]);
+  }
+  addTableFooter();
+}
+function Locations(name, min, max, avg) {
 
-    this.name = name;
-    this.min = min;
-    this.max = max;
-    this.avg = avg;
-    this.hours = hours;
-    objectNumber++;
-    }
- Locations.prototype.getCookiesEachHour = function(){
-   this.arrayCookie = [];
-   this.numCookie = [];
- 
+  this.name = name;
+  this.min = min;
+  this.max = max;
+  this.avg = avg;
+  this.hours = hours;
+  objectNumber++;
 
-   let total = 0;
-   let currentCount = 0;
-  for(let i=0; i<hours.length-1 ;i++){
-    currentCount = Math.floor(randomCookie(this.min,this.max)*this.avg); 
-    this.arrayCookie.push(`${hours[i]} ${currentCount} cookies`);
+  allStores.push(this);
+}
+
+
+Locations.prototype.getCookiesEachHour = function () {
+  this.arrayCookie = [];
+  this.numCookie = [];
+
+
+  let total = 0;
+  let currentCount = 0;
+  for (let i = 0; i < hours.length - 1; i++) {
+    currentCount = Math.floor(randomCookie(this.min, this.max) * this.avg);
+    this.arrayCookie.push(`${currentCount} cookies`);
     this.numCookie.push(currentCount);
 
     total += currentCount;
-    console.log(total);
-    
-    
- }
-    this.arrayCookie.push(`Total: ${total} cookies`);
-    this.numCookie.push(total);
-    
- return this.arrayCookie;
+
+
+
+  }
+  this.arrayCookie.push(`Total: ${total} cookies`);
+  this.numCookie.push(total);
+
+  return this.arrayCookie;
 }
+
+
+
+formElem.addEventListener('submit', handleSubmit);
+
+
+function randomCookie(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 let seattle = new Locations("Seattle", 23, 65, 6.3);
 
-let Tokyo = new Locations("Tokyo", 3, 24,1.2);
+let Tokyo = new Locations("Tokyo", 3, 24, 1.2);
 
-let Dubai = new Locations("Dubai",11,38,2.3);
+let Dubai = new Locations("Dubai", 11, 38, 2.3);
 
-let Paris = new Locations("Paris",20,38,2.3);
+let Paris = new Locations("Paris", 20, 38, 2.3);
 
-let Lima = new Locations("Lima",2,16,4.6);
+let Lima = new Locations("Lima", 2, 16, 4.6);
 
-let objectsArray = [seattle,Tokyo,Dubai,Paris,Lima];
+let objectsArray = [seattle, Tokyo, Dubai, Paris, Lima];
 
 
 
@@ -58,12 +101,12 @@ Paris.getCookiesEachHour();
 Lima.getCookiesEachHour();
 
 
-function makeCookieDiv(Locations){
+function makeCookieDiv(Locations) {
 
   const div = document.getElementById('div');
 
   const createArticle = document.createElement('article');
-    let store = Locations.name;
+  let store = Locations.name;
   createArticle.setAttribute("id", store);
 
   div.appendChild(createArticle);
@@ -72,22 +115,9 @@ function makeCookieDiv(Locations){
   createArticle.appendChild(h2);
 }
 
-// function makeCookieLi(Locations){
-//   let store = Locations.name;
-//    const article = document.getElementById(store);
-//   const ul = document.createElement("ul")
-//   article.appendChild(ul);
-//   for(let i = 0; i < Locations.arrayCookie.length; i++){
-//     const li = document.createElement('li');
-//     li.textContent = Locations.arrayCookie[i];
-//     ul.appendChild(li);
-//   }
-//}
+
 function addTableHeader() {
-  // let store = Locations.name;
-  // const article = document.getElementById(store);
-  //  const table = document.createElement("table");
-  console.log("Inside Table Header function");
+
   const table = document.getElementById("table");
   const th1 = document.createElement("th");
   const tr = document.createElement("tr");
@@ -100,59 +130,54 @@ function addTableHeader() {
     tr.appendChild(th);
   }
 }
- function addTableBody(locations){
+function addTableBody(locations) {
   const body = document.getElementById("table");
-  // for (let i=0; i < objectNumber; i++ ){
-    
-    const tr = document.createElement("tr");
-    body.appendChild(tr);
-    const nameTd = document.createElement('td');
-    nameTd.textContent = locations.name;
-    tr.appendChild(nameTd);
-    for (let j=0; j < locations.arrayCookie.length; j++ ){
 
-      const td = document.createElement("td");
-      td.textContent = locations.arrayCookie[j];
-      tr.appendChild(td);
- 
-    }
-  
-    
-  }
-  
-function addTableFooter(){
-  const footer = document.getElementById("table");
   const tr = document.createElement("tr");
-    footer.appendChild(tr);
-    const nameTd = document.createElement('td');
-    nameTd.textContent = "Totals";
-    footer.appendChild(nameTd);
-    let totalFooter = 0;
-    for (let j=0; j < hours.length-1; j++ ){
-      
-      const createTd = document.createElement('td');
-      
-      for(let k=0; k < objectNumber; k++){
-        totalFooter += objectsArray[k].numCookie[j];
-      }
-        createTd.textContent = (totalFooter);
-    
-    footer.appendChild(createTd);
-    totalFooter = 0;
-    }
-   
-    const totalTd = document.createElement('td')
-    for(let k=0; k < objectNumber; k++){
-      totalFooter += objectsArray[k].numCookie[objectsArray[k].numCookie.length-1];
-    }
-      totalTd.textContent = (totalFooter);
-      footer.appendChild(totalTd);
+  body.appendChild(tr);
+  const nameTd = document.createElement('td');
+  nameTd.textContent = locations.name;
+  tr.appendChild(nameTd);
+  for (let j = 0; j < locations.arrayCookie.length; j++) {
+
+    const td = document.createElement("td");
+    td.textContent = locations.arrayCookie[j];
+    tr.appendChild(td);
+
+  }
+
 
 }
 
-//  }
+function addTableFooter() {
+  const footer = document.getElementById("table");
+  const tr = document.createElement("tr");
+  footer.appendChild(tr);
+  const nameTd = document.createElement('td');
+  nameTd.textContent = "Totals";
+  footer.appendChild(nameTd);
+  let totalFooter = 0;
+  for (let j = 0; j < hours.length - 1; j++) {
 
-// I have to add the 0 place of each different object then repeat for each instance
+    const createTd = document.createElement('td');
+
+    for (let k = 0; k < objectNumber; k++) {
+      totalFooter += allStores[k].numCookie[j];
+    }
+    createTd.textContent = (totalFooter);
+
+    footer.appendChild(createTd);
+    totalFooter = 0;
+  }
+
+  const totalTd = document.createElement('td')
+  for (let k = 0; k < objectNumber; k++) {
+    totalFooter += allStores[k].numCookie[allStores[k].numCookie.length - 1];
+  }
+  totalTd.textContent = (totalFooter);
+  footer.appendChild(totalTd);
+
+}
 
 
 addTableHeader();
@@ -162,45 +187,3 @@ addTableBody(objectsArray[2]);
 addTableBody(objectsArray[3]);
 addTableBody(objectsArray[4]);
 addTableFooter();
-
-
-/*
-<table>
- <thead>
-  <tr>
-  loop creating a th each time displaying the hours[i] 
-    <th>hours[0]</th>
-    <th>hours[1]</th>
-    <th>hours[2]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-    <th>hours[0]</th>
-  </tr>
- </thead> 
-Function to make the store location row loop
-<tbody>
-  <tr>
-    loop based on amount of loacations
-    <td>Location.name</td>
-    loop 15 times
-    <td>arrayCookie[0]</td>
-  </tr>
-</tbody>
-<tfooter>
-  <tr>
-    <td>Totals</td>
-  </tr>
-</tfooter>
-*/
-
-
