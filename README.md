@@ -9,4 +9,6 @@ submission PR
 Any Links you used as reference
 Reflections and Comments
 Consider including the answers to your daily journal and submission questions here
-This is also a good place to reflect on the tools and resources used and
+This is also a good place to reflect on the tools and resources used.
+
+[To my Index page](/mnt/c/Users/joelc/Documents/projects/codefellows/201/cookie-stand/html/index.html)

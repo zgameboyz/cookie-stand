@@ -101,20 +101,6 @@ Paris.getCookiesEachHour();
 Lima.getCookiesEachHour();
 
 
-function makeCookieDiv(Locations) {
-
-  const div = document.getElementById('div');
-
-  const createArticle = document.createElement('article');
-  let store = Locations.name;
-  createArticle.setAttribute("id", store);
-
-  div.appendChild(createArticle);
-  const h2 = document.createElement('h2');
-  h2.textContent = Locations.name;
-  createArticle.appendChild(h2);
-}
-
 
 function addTableHeader() {
 

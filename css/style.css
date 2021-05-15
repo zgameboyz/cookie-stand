@@ -6,20 +6,23 @@ nav{
   flex-direction: row;
   justify-items: center space-between 20px;
   background-color: lightcyan;
-  border: #ff4292 solid 5px;
-  margin: auto;
+  margin-bottom: 35px;
+
   }
   nav a {
     color: black;
     font-size: 35pt;
   }
   nav button{
-    width: 500px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     margin: auto;
     font-size: larger;
     background: url("../img/frosted-cookie.jpg") no-repeat;
     background-size: 500px 250px;
+    border-radius: 25px;
+    font-family: 'Playfair Display SC', serif;
+    color: blueviolet;
     
     
   }
@@ -29,12 +32,16 @@ nav{
   }
   #family img{
     width: 1000px;
+    border-radius: 25px;
+
    
 
   }
   #family article{
     text-align: center;
     font-size: 2em;
+    font-family: 'Playfair Display SC', serif;
+    color: blueviolet;
   }
 
 
@@ -62,10 +69,12 @@ p{
 }
 h1{
   font-size: 3em;
+  font-family: 'Dancing Script', cursive;
+  color: darkorange;
 }
 header h1 p {
   width: 1000px;
-  border: solid #ff4292 5px;
+
   text-align: center;
   border-radius: 15px;
 }
@@ -128,4 +137,22 @@ footer{
   
   width: 1000px;
   
+}
+#images {
+  display: flex;
+  flex-direction: row;
+}
+
+#chinookPic p{
+ width: 1000px;
+ margin-bottom: 35px;
+ font-family: 'Playfair Display SC', serif;
+ font-size: 1.3em;
+ color: blueviolet;
+}
+#chinookPic{
+  margin-top: 35px;
+}
+#chinookPic img{
+  margin-left: 275px;
 }
