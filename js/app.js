@@ -19,7 +19,7 @@ function handleSubmit(event) {
 
   let newLocations = new Locations(name, min, max, avg);
   console.log(newLocations);
-  allStores.push(newLocations);
+  
 
   newLocations.getCookiesEachHour();
   renderAllLocations();
